@@ -1,4 +1,6 @@
-{
+import 'dotenv/config';
+
+export default {
   "expo": {
     "name": "Part10_React_Native",
     "slug": "Part10_React_Native",
@@ -15,7 +17,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hanasiyou.reactEx"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +28,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "env": process.env.ENV,
+      "APOLLO_URI": process.env.APOLLO_URI
+    },
+    "jsEngine": "jsc"
   }
 }
