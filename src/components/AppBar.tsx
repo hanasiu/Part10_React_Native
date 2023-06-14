@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 
 
 const AppBar = () => {
-  const {data} = useMe();
+  const { data } = useMe();
   //const authStorage = useAuthStorage();
   //const apolloClient = useApolloClient();
 
@@ -59,10 +59,15 @@ const AppBar = () => {
           </Link>
         </View>}
         {data?.me && <View style={styles.button}>
-        <Pressable onPress={signOut}>
-  <Text style={styles.text}>Sign-out</Text>
-</Pressable>
-          </View>}
+          <Link to="/review">
+            <Text style={styles.text}>Create a review</Text>
+          </Link>
+        </View>}
+        {data?.me && <View style={styles.button}>
+          <Pressable onPress={signOut}>
+            <Text style={styles.text}>Sign-out</Text>
+          </Pressable>
+        </View>}
       </ScrollView>
     </View>
   )

@@ -7,10 +7,7 @@ import { useApolloClient } from '@apollo/client';
 import { SignInForm } from '../types';
 import AuthStorage from "../utils/authStorage";
 
-const credentials = {
-  username: '',
-  password: ''
-}
+
 
 const useSignIn = () => {
   const [mutate, result] = useMutation(AUTHENTICATE_USER);
@@ -23,8 +20,12 @@ const useSignIn = () => {
     // }
   
     const signIn = async ({ username, password }: SignInForm) => {
-      credentials.username = username;
-      credentials.password = password;
+      const credentials = {
+        username: username,
+        password: password
+      }
+      // credentials.username = username;
+      // credentials.password = password;
       const payload = await mutate({variables: {credentials}});
       const { data } = payload;
       if (data?.authenticate) {

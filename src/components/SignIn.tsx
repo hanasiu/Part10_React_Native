@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, TextInput, Button, Alert, StyleSheet } from "react-native";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { View, TextInput, Button, StyleSheet } from "react-native";
+import { useForm, Controller } from "react-hook-form";
 import Text from './Text';
 import theme from '../theme';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -101,7 +101,7 @@ export const SignInContainer =
     );
   }
 
-export default function App() {
+export default function SignIn() {
   const [signIn] = useSignIn();
 
   return (

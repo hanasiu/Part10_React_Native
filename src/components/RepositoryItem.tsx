@@ -3,6 +3,7 @@ import { View, Image, StyleSheet } from 'react-native';
 import Text from './Text';
 import theme from '../theme';
 import { Repository } from '../types';
+import { ViewStyle } from 'react-native';
 
 
 const styles = StyleSheet.create({
@@ -39,25 +40,22 @@ const styles = StyleSheet.create({
 });
 
 
-const RepositoryItem = ({item} : {item: Repository}) => {
+const RepositoryItem = ({item, style} : {item: Repository, style: ViewStyle}) => {
     return (
-        <View style={styles.container} testID="repositoryItem" >
+        <View style={style} testID="repositoryItem" >
             <View style={{ flexDirection: 'row' }}>
                 <Image
                     style={{ width: 50, height: 50 }}
                     source={{ uri: item.ownerAvatarUrl }}
                 />
                 <View style={styles.infoContainer}>
-               
                     <Text fontSize="subheading" fontWeight="bold">
                         {item.fullName}
                     </Text>
-        
                     <Text>{item.description}</Text>
                 </View>
             </View>
             <View style={styles.languageContainer}>
-            
                 <Text color="white" style={styles.languageText}>
                     {item.language}
                 </Text>

@@ -6,6 +6,8 @@ import RepositoryList from './RepositoryList';
 //import Text from './Text';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
+import SingleRepository from './SingleRepository';
+import ReviewForm from './ReviewForm';
 //import FlexboxExample from './FlexBoxExample';
 
 
@@ -27,6 +29,8 @@ const Main = () => {
         <Route path="/" element={<RepositoryList />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/:id" element={<SingleRepository/>}/>
+        <Route path="/review" element={<ReviewForm/>}/>
       </Routes>
     </View>
   );
