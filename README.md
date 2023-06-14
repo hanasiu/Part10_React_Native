@@ -1,3 +1,6 @@
+server provided by the course.  
+https://github.com/fullstack-hy2020/rate-repository-api  
+
 development setting diffrent from helsinki fullstack course part 10(2023).  
 
 expo version 48 instead of 48.  
