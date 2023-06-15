@@ -68,6 +68,11 @@ const AppBar = () => {
             <Text style={styles.text}>Sign-out</Text>
           </Pressable>
         </View>}
+        {!data?.me && <View style={styles.button}>
+          <Link to="/signup">
+            <Text style={styles.text}>Sign-Up</Text>
+          </Link>
+        </View>}
       </ScrollView>
     </View>
   )

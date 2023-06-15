@@ -13,9 +13,14 @@ import { FetchResult } from "@apollo/client";
 
 
 const schema = yup.object({
-  ownerName: yup.string().required(),
-  repositoryName: yup.string().required(),
-  stringRating: yup.number().required().min(0, "Minimum at least 0").max(100, "Allowed maximum is 100"),
+  ownerName: yup.string()
+  .required("Repository owner name is required"),
+  repositoryName: yup.string()
+  .required("Repository name is required"),
+  stringRating: yup.number()
+  .required("Rating is required")
+  .min(0, "Minimum at least 0")
+  .max(100, "Allowed maximum is 100"),
   text: yup.string().notRequired()
 }).required();
 
@@ -27,6 +32,10 @@ export const ReviewFormContainer =
     });
     const [ serverError, setServerError ] = useState<string | null>(null);
     const navigate = useNavigate();
+
+    const clearError = () => {
+      setServerError(null);
+    };
 
     const onSubmit = async (values: ReviewFormType) => {
       const { ownerName, repositoryName, stringRating, text } = values;
@@ -46,6 +55,7 @@ export const ReviewFormContainer =
         }
       } catch (e: unknown) {
         setServerError(e as string);
+        setTimeout(clearError, 5000);
       }
     };
 

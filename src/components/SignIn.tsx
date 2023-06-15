@@ -14,8 +14,10 @@ import { FetchResult } from "@apollo/client";
 
 
 const schema = yup.object({
-  username: yup.string().required(),
-  password: yup.string().required(),
+  username: yup.string()
+  .required("Username is required"),
+  password: yup.string()
+  .required("Password is required"),
 }).required();
 
 export const SignInContainer =

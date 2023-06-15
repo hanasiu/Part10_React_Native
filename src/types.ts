@@ -52,9 +52,16 @@ export type RepositoryWithReview = {
   error: ApolloError | undefined;
 };
 
+//SignIn and SignUp
 export type SignInForm = {
   username: string;
   password: string;
+}
+
+export type SignUpForm = {
+  username: string;
+  password: string;
+  confirmPassword: string;
 }
 
 export type ReviewFormType = {
