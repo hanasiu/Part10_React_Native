@@ -37,13 +37,53 @@ export type RepositoriesResult = {
   error: ApolloError | undefined;
 };
 
-export type RepositoryWithReview = {
+
+// export type RepositoryWithReview = {
+//   data: {
+//     repository: {
+//       id: string;
+//       reviews: {
+//         edges: {
+//           node: RepositoryReview;
+//         }[];
+//       };
+//     };
+//   };
+//   loading: boolean;
+//   error: ApolloError | undefined;
+// };
+
+export type useRepositoryType = {
   data: {
     repository: {
       id: string;
       reviews: {
         edges: {
           node: RepositoryReview;
+        }[];
+      };
+    };
+  };
+  loading: boolean;
+  error: ApolloError | undefined;
+  fetchMore: ()=>void;
+}
+
+export type MyReview = {
+  id: string;
+  text: string;
+  rating: number;
+  createdAt: string;
+  repository: Repository;
+};
+
+export type UserReview = {
+  data: {
+    me: {
+      id: string;
+      reviews: {
+        edges: {
+          node: MyReview;
         }[];
       };
     };
@@ -78,3 +118,12 @@ export type ReviewFormTypeToServer = {
   text: string;
 }
 
+export enum Direction {
+  ASC="ASC",
+  DESC="DESC"
+}
+
+export enum Order_By {
+  CREATED_AT="CREATED_AT",
+  RATING_AVERAGE="RATING_AVERAGE"
+}

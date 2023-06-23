@@ -3,9 +3,9 @@ import useRepository from '../hooks/useRepository';
 import { useLocation } from 'react-router-dom';
 import { View, StyleSheet, FlatList } from 'react-native';
 import Text from './Text';
-import { RepositoryWithReview } from '../types';
+import { useRepositoryType } from '../types';
 import RepositoryInfo from './RepositoryInfo';
-import ReviewItem from './ReviewItem';
+import ReviewItem from './RepoReviewItem';
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -16,17 +16,21 @@ const SingleRepository = () => {
     if (!clickedItem) {
         return <div>Repository not found</div>;
     }
-    const oneRepository: RepositoryWithReview = useRepository(clickedItem.id);//id fullName reviews 
+    const { data, loading, error, fetchMore } : useRepositoryType = useRepository({first:5, repositoryId:clickedItem.id});//id fullName reviews 
+    const onEndReach = () => {
+        console.log('You have reached the end of the list');
+        fetchMore();
+      };
 
-    if (oneRepository.loading) {
+    if (loading) {
         return <Text>Repository loading</Text>;
     }
-    if (oneRepository.error) {
-        return <Text>{oneRepository.error.message}</Text>;
+    if (error) {
+        return <Text>{error.message}</Text>;
     }
 
-    const reviewNodes = oneRepository.data.repository.reviews
-        ? oneRepository?.data?.repository.reviews.edges.map(edge => edge.node)
+    const reviewNodes = data.repository.reviews
+        ? data?.repository.reviews.edges.map(edge => edge.node)
         : [];
 
     return (
@@ -41,6 +45,8 @@ const SingleRepository = () => {
                     <View style={styles.space} />
                 </View>
             )}
+            onEndReached={onEndReach}
+            onEndReachedThreshold={0.6}
         // ...
         />
     );

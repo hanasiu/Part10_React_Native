@@ -4,6 +4,7 @@ import Constants from 'expo-constants';
 import useMe from "../hooks/useMe";
 import useRemoveUser from "../hooks/useRemoveUser";
 import React from 'react';
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -38,9 +39,11 @@ const AppBar = () => {
   //const apolloClient = useApolloClient();
 
   const removeUser = useRemoveUser(); // Call the hook directly
+  const navigate = useNavigate();
 
   const signOut = async () => {
     await removeUser(); // Await the removal process
+    navigate('/');
     console.log(data);
   };
 
@@ -61,6 +64,11 @@ const AppBar = () => {
         {data?.me && <View style={styles.button}>
           <Link to="/review">
             <Text style={styles.text}>Create a review</Text>
+          </Link>
+        </View>}
+        {data?.me && <View style={styles.button}>
+          <Link to="/myreview">
+            <Text style={styles.text}>My reviews</Text>
           </Link>
         </View>}
         {data?.me && <View style={styles.button}>

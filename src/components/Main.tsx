@@ -9,6 +9,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import SingleRepository from './SingleRepository';
 import ReviewForm from './ReviewForm';
+import MyReview from './MyReview';
 //import FlexboxExample from './FlexBoxExample';
 
 
@@ -33,6 +34,7 @@ const Main = () => {
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/:id" element={<SingleRepository/>}/>
         <Route path="/review" element={<ReviewForm/>}/>
+        <Route path="/myreview" element={<MyReview/>}/>
       </Routes>
     </View>
   );

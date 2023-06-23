@@ -5,6 +5,8 @@ const theme = {
       textPrimary: '#24292e',
       textSecondary: '#586069',
       primary: '#0366d6',
+      violet: '#9191ff',
+      red: '#f55d7c'
     },
     fontSizes: {
       body: 14,

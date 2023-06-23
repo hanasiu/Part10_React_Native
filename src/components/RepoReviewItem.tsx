@@ -1,19 +1,20 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet} from 'react-native';
 import Text from './Text';
 import { RepositoryReview } from '../types';
 import theme from '../theme';
 import { format } from 'date-fns';
 
 
-const ReviewItem = ({ review }: { review: RepositoryReview }) => {
+const RepoReviewItem = ({ review }: { review: RepositoryReview }) => {
     return (
         <View style={styles.container}>
             <View style={styles.upperInfoContainer}>
                 <View style={styles.rateContainer}>
                     <Text style={styles.rateText}>{review.rating}</Text></View>
                 <View style={styles.downInfoContainer}>
-                    <View style={{ marginBottom: 4 }}><Text style={styles.textUsername}>{review.user.username}</Text></View>
+                    <View style={{ marginBottom: 4 }}><Text style={styles.textUsername}>
+                        {review.user.username}</Text></View>
                     <View style={{ marginBottom: 5 }}><Text>{format(new Date(review.createdAt), 'MM/dd/yyyy')}</Text></View>
                     <View><Text>{review.text}</Text></View>
                 </View>
@@ -56,4 +57,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ReviewItem;
+export default RepoReviewItem;

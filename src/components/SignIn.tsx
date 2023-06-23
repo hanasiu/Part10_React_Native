@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, Pressable } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Text from './Text';
 import theme from '../theme';
@@ -15,20 +15,24 @@ import { FetchResult } from "@apollo/client";
 
 const schema = yup.object({
   username: yup.string()
-  .required("Username is required"),
+    .required("Username is required"),
   password: yup.string()
-  .required("Password is required"),
+    .required("Password is required"),
 }).required();
 
 export const SignInContainer =
-  ({SignProcess}: 
-    {SignProcess: ({ username, password }: SignInForm) => Promise<FetchResult<any>>}) => 
-    {
+  ({ SignProcess }:
+    { SignProcess: ({ username, password }: SignInForm) => Promise<FetchResult<any>> }) => {
     const { control, handleSubmit, formState: { errors } } = useForm<SignInForm>({
       resolver: yupResolver(schema)
     });
     const [navigateToHome, setNavigateToHome] = useState(false);
     //const navigate = useNavigate();
+    const [ serverError, setServerError ] = useState<string | null>(null);
+
+    const clearError = () => {
+      setServerError(null);
+    };
 
     const onSubmit = async (values: SignInForm) => {
       const { username, password } = values;
@@ -41,8 +45,9 @@ export const SignInContainer =
           //but It is just for exercise. I rather choose end-to-end test for login.
           //navigate('/');
         }
-      } catch (e) {
-        console.log(e);
+      } catch (e: unknown) {
+        setServerError(e as string);
+        setTimeout(clearError, 5000);
       }
     };
 
@@ -97,8 +102,16 @@ export const SignInContainer =
         </View>
 
         <View style={styles.buttonStyle}>
-          <Button title="Submit" onPress={handleSubmit(onSubmit)} color="white" />
+          {/* <Button title="Submit" onPress={handleSubmit(onSubmit)} color={Platform.OS === 'ios' ? 'white' : undefined} /> */}
+          <Pressable onPress={handleSubmit(onSubmit)}>
+            <Text color="white" style={styles.buttonText}>
+              Submit
+            </Text>
+          </Pressable>
         </View>
+        {serverError ? <View style={styles.inputContainer}>
+          <Text style={styles.errorText}>{serverError.toString()}</Text>
+        </View> : null}
       </View>
     );
   }
@@ -107,7 +120,7 @@ export default function SignIn() {
   const [signIn] = useSignIn();
 
   return (
-    <SignInContainer SignProcess={signIn}/>
+    <SignInContainer SignProcess={signIn} />
   );
 }
 
@@ -129,7 +142,16 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     margin: 10,
-    backgroundColor: theme.colors.primary,
-    borderRadius: 5,
+    backgroundColor: theme.colors.violet,
+    borderRadius: 4,
+    length: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 18
+  }
 });
+

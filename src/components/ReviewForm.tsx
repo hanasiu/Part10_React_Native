@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, Pressable, Keyboard } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Text from './Text';
 import theme from '../theme';
@@ -49,12 +49,13 @@ export const ReviewFormContainer =
       try {
         const reviewResult = await ReviewProcess({ ownerName, repositoryName, rating, text });
         console.log(reviewResult);
-
         if (reviewResult.data) {
           navigate('/');
         }
       } catch (e: unknown) {
         setServerError(e as string);
+        //error message not visible due to keyboard. make keyboard disappear
+        Keyboard.dismiss();
         setTimeout(clearError, 5000);
       }
     };
@@ -149,9 +150,13 @@ export const ReviewFormContainer =
           />
           <Text style={styles.errorText}>{errors.text?.message}</Text>
         </View>
-
         <View style={styles.buttonStyle}>
-          <Button title="Submit" onPress={handleSubmit(onSubmit)} color="white" />
+        {/* <Button title="Submit" onPress={handleSubmit(onSubmit)} color={Platform.OS === 'ios' ? 'white' : undefined}  /> */}
+          <Pressable onPress={handleSubmit(onSubmit)}>
+            <Text color="white" style={styles.buttonText}>
+              Submit
+            </Text>
+          </Pressable>
         </View>
         {serverError ? <View style={styles.inputContainer}>
           <Text style={styles.errorText}>{serverError.toString()}</Text>
@@ -186,7 +191,15 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     margin: 10,
-    backgroundColor: theme.colors.primary,
-    borderRadius: 5,
+    backgroundColor: theme.colors.violet,
+    borderRadius: 4,
+    length: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 18
+  }
 });

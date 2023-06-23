@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, View, StyleSheet, Pressable, Platform, VirtualizedList } from 'react-native';
+import { FlatList, View, StyleSheet, Pressable, Platform } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 import Text from './Text';
@@ -7,8 +7,6 @@ import { RepositoriesResult } from '../types';
 import { useNavigate } from 'react-router-dom';
 import { Repository, Direction, Order_By } from '../types';
 import OrderSelector from './OrderSelector';
-import SearchRepository from './SearchRepository';
-import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
   separator: {
@@ -22,14 +20,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryListContainer = 
-({ data, loading, error, selectedOrder, onSelectOrder, searchQuery, setSearchQuery, onEndReach }:
-  RepositoriesResult & {
-    selectedOrder: { orderDirection: Direction; orderBy: Order_By };
-    onSelectOrder: (selectedValue: { orderDirection: Direction; orderBy: Order_By }) => void,
-    searchQuery: string, setSearchQuery: React.Dispatch<React.SetStateAction<string>>,
-    onEndReach: () => void
-  }) => {
+const RepositoryListContainer = ({ data, loading, error, selectedOrder, onSelectOrder }: RepositoriesResult & { selectedOrder: { orderDirection: Direction; orderBy: Order_By }; onSelectOrder: (selectedValue: { orderDirection: Direction; orderBy: Order_By }) => void }) => {
   const navigate = useNavigate();
 
   const repositoryNodes = data?.repositories
@@ -57,15 +48,10 @@ const RepositoryListContainer =
         </Pressable>
       )}
       ListHeaderComponent={
-        <View>
-          <SearchRepository searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-          <OrderSelector selectedOrder={selectedOrder} onSelectOrder={onSelectOrder} />
-        </View>
+        <OrderSelector selectedOrder={selectedOrder} onSelectOrder={onSelectOrder} />
       }
-      ListHeaderComponentStyle={{ overflow: 'visible', zIndex: 3 }}
+      ListHeaderComponentStyle={{overflow: 'visible', zIndex:3}}
       removeClippedSubviews={Platform.OS === 'android' ? false : true} // this code is for android..
-      onEndReached={onEndReach}
-      onEndReachedThreshold={0.6}
     />
   );
 };
@@ -78,33 +64,16 @@ const RepositoryList = () => {
 
   const handleOrderSelection = (selectedValue: { orderDirection: Direction; orderBy: Order_By }) => {
     setSelectedOrder(selectedValue);
+    // Do whatever you need to do with the selected value
+    console.log('Selected Order:', selectedValue);
   };
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchKeyword] = useDebounce(searchQuery, 500);
-  console.log(searchKeyword);
-
-
-  const { data, fetchMore, loading, error } = useRepositories({ first: 5, ...selectedOrder, searchKeyword: searchKeyword });
-  console.log(data);
-
-  const onEndReach = () => {
-    console.log("haha")
-     fetchMore();
-  };
+  const { data, loading, error } = useRepositories(selectedOrder);
 
   return (
     <>
-      <RepositoryListContainer
-        data={data}
-        loading={loading}
-        error={error}
-        selectedOrder={selectedOrder}
-        onSelectOrder={handleOrderSelection}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery} 
-        onEndReach={onEndReach}
-        />
+      {/* <OrderSelector selectedOrder={selectedOrder} onSelectOrder={handleOrderSelection} /> */}
+      <RepositoryListContainer data={data} loading={loading} error={error} selectedOrder={selectedOrder} onSelectOrder={handleOrderSelection} />
     </>
   );
 };
