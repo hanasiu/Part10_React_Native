@@ -25,4 +25,5 @@ const useRepository = (variables: {first:number, repositoryId: string}) => {
 
   return { data, fetchMore: handleFetchMore, loading, error };
 };
+
 export default useRepository;

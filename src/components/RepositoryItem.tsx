@@ -5,41 +5,6 @@ import theme from '../theme';
 import { Repository } from '../types';
 import { ViewStyle } from 'react-native';
 
-
-const styles = StyleSheet.create({
-    container: {
-        padding: 20,
-        backgroundColor: 'white'
-    },
-    infoContainer: {
-        marginLeft: 10,
-        flex: 1,
-        justifyContent: 'space-around'
-    },
-    languageContainer: {
-        backgroundColor: theme.colors.primary,
-        borderRadius: 4,
-        padding: 5,
-        marginTop: 10,
-        marginLeft: 60,
-        alignSelf: 'flex-start',
-        width: 'auto',
-        marginBottom: 10,
-    },
-    languageText: {
-        color: 'white',
-    },
-    subInfoContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    },
-    smallContainer: {
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    }
-});
-
-
 const RepositoryItem = ({item, style} : {item: Repository, style: ViewStyle}) => {
     return (
         <View style={style} testID="repositoryItem" >
@@ -82,5 +47,39 @@ const RepositoryItem = ({item, style} : {item: Repository, style: ViewStyle}) =>
         </View>
     );
 };
+
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 20,
+        backgroundColor: 'white'
+    },
+    infoContainer: {
+        marginLeft: 10,
+        flex: 1,
+        justifyContent: 'space-around'
+    },
+    languageContainer: {
+        backgroundColor: theme.colors.primary,
+        borderRadius: 4,
+        padding: 5,
+        marginTop: 10,
+        marginLeft: 60,
+        alignSelf: 'flex-start',
+        width: 'auto',
+        marginBottom: 10,
+    },
+    languageText: {
+        color: 'white',
+    },
+    subInfoContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    smallContainer: {
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    }
+});
 
 export default RepositoryItem;

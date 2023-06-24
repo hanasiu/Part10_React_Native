@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { Direction, Order_By } from "../types";
 import { Button, Menu, Divider, PaperProvider } from 'react-native-paper';
-//import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
 import { View } from 'react-native';
 
 const OrderSelector = ({ selectedOrder, onSelectOrder }: {
@@ -19,7 +18,6 @@ const OrderSelector = ({ selectedOrder, onSelectOrder }: {
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
-  //const [selectedValue, setSelectedValue] = useState(selectedOrder);
   let selectedTitle =
   (selectedOrder?.orderDirection ===Direction.DESC && selectedOrder?.orderBy === Order_By.CREATED_AT ? "Latest repositories" :
   selectedOrder?.orderDirection ===Direction.ASC && selectedOrder?.orderBy === Order_By.CREATED_AT ? "Oldest repositories" :

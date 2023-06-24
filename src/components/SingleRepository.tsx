@@ -47,7 +47,6 @@ const SingleRepository = () => {
             )}
             onEndReached={onEndReach}
             onEndReachedThreshold={0.6}
-        // ...
         />
     );
 };

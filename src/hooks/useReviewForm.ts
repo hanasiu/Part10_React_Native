@@ -6,8 +6,6 @@ import { ReviewFormTypeToServer } from '../types';
 
 const useReviewForm = () => {
   const [mutate, result] = useMutation(CREATE_REVIEW);
-  // Call the createReview mutation
-
 
   const createReview = async ({ ownerName, repositoryName, rating, text }: ReviewFormTypeToServer) => {
     const review = {

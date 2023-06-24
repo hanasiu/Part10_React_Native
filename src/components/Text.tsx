@@ -1,4 +1,4 @@
-//it is difficult for me to 'type' this javascript component provided by the course. so I use any and ? a lot.
+//it is difficult for me to 'type' this javascript component provided by the course. so I use 'any' and ? a lot.
 import React from 'react'
 import { Text as NativeText, StyleSheet } from 'react-native';
 

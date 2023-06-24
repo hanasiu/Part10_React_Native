@@ -10,16 +10,6 @@ import OrderSelector from './OrderSelector';
 import SearchRepository from './SearchRepository';
 import { useDebounce } from 'use-debounce';
 
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-  container: {
-    padding: 20,
-    backgroundColor: 'white'
-  },
-});
-
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryListContainer = 
@@ -108,6 +98,17 @@ const RepositoryList = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  separator: {
+    height: 10,
+  },
+  container: {
+    padding: 20,
+    backgroundColor: 'white'
+  },
+});
+
 
 export default RepositoryList;
 

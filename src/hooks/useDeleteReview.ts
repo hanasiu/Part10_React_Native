@@ -1,9 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { DELETE_REVIEW } from '../graphql/mutations';
 import { CHECK_ME } from '../graphql/queries';
-//import { ReviewFormTypeToServer } from '../types';
-
-
 
 
 const useDeleteReview = () => {

@@ -5,7 +5,6 @@ import { RepositoryReview } from '../types';
 import theme from '../theme';
 import { format } from 'date-fns';
 
-
 const RepoReviewItem = ({ review }: { review: RepositoryReview }) => {
     return (
         <View style={styles.container}>

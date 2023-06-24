@@ -1,17 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Route, Routes, Navigate } from 'react-router-native';
-
 import RepositoryList from './RepositoryList';
-//import Text from './Text';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import SingleRepository from './SingleRepository';
 import ReviewForm from './ReviewForm';
 import MyReview from './MyReview';
-//import FlexboxExample from './FlexBoxExample';
-
 
 
 const styles = StyleSheet.create({
@@ -21,7 +17,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#e1e4e8'
   },
 });
-
 
 const Main = () => {
   return (

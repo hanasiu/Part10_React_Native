@@ -16,13 +16,6 @@ const RepoReviewItem = ({ review }: { review: MyReview }) => {
     }
     const [deleteReview] = useDeleteReview();
     
-    // const handleDeleteReview = async (id: string) => {
-    //     try { 
-    //         await deleteReview(id);
-    //     } catch(e) {
-    //         console.log(e);
-    //     }
-    // }
     const handleDeleteReview = (id: string) => {
         Alert.alert(
           'Delete Review',

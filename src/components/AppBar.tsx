@@ -6,37 +6,9 @@ import useRemoveUser from "../hooks/useRemoveUser";
 import React from 'react';
 import { useNavigate } from "react-router-native";
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#24292e',
-    height: 80,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  scroll: {
-    flexDirection: "row"
-  },
-  buttonFirst: {
-    marginLeft: 20
-  },
-  button: {
-    marginLeft: 10
-  },
-  text: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 15
-  }
-  // ...
-});
-
 
 const AppBar = () => {
   const { data } = useMe();
-  //const authStorage = useAuthStorage();
-  //const apolloClient = useApolloClient();
 
   const removeUser = useRemoveUser(); // Call the hook directly
   const navigate = useNavigate();
@@ -85,5 +57,30 @@ const AppBar = () => {
     </View>
   )
 };
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#24292e',
+    height: 80,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  scroll: {
+    flexDirection: "row"
+  },
+  buttonFirst: {
+    marginLeft: 20
+  },
+  button: {
+    marginLeft: 10
+  },
+  text: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 15
+  }
+});
 
 export default AppBar;
