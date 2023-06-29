@@ -10,7 +10,13 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const MyReview = () => {
     const { data } = useMe();
-    const userReview: UserReview = useMyReview(!!data.me);
+    const userReview: UserReview = useMyReview({includeReviews: !!data.me, first: 6});
+    console.log(userReview);
+
+    const onEndReach = () => {
+        console.log('You have reached the end of the list');
+        userReview.fetchMore();
+      };
 
     if (userReview.loading) {
         return <Text>Repository loading</Text>;
@@ -22,7 +28,6 @@ const MyReview = () => {
     const reviewNodes = userReview.data.me.reviews
         ? userReview?.data?.me?.reviews?.edges.map(edge => edge.node)
         : [];
-    console.log(reviewNodes);
 
     return (
         <FlatList
@@ -30,6 +35,8 @@ const MyReview = () => {
             renderItem={({ item }) => <MyReviewItem review={item} />}
             keyExtractor={({ id }) => id}
             ItemSeparatorComponent={ItemSeparator}
+            onEndReached={onEndReach}
+            onEndReachedThreshold={0.6}
         />
     );
 };

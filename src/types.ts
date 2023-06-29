@@ -90,6 +90,7 @@ export type UserReview = {
   };
   loading: boolean;
   error: ApolloError | undefined;
+  fetchMore: ()=>void;
 };
 
 //SignIn and SignUp

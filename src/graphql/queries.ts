@@ -99,11 +99,11 @@ query SearchRepository($searchKeyword: String){
 `
 
 export const CHECK_ME = gql`
-query CheckMe($includeReviews: Boolean = false) {
+query CheckMe($includeReviews: Boolean = false, $first: Int, $after: String) {
   me {
     id
     username
-    reviews @include(if: $includeReviews) {
+    reviews(first: $first, after: $after) @include(if: $includeReviews) {
       edges {
         node {
         id
@@ -123,9 +123,16 @@ query CheckMe($includeReviews: Boolean = false) {
         url
         }
         }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
       }
     }
   }
 }
 `
+
 
