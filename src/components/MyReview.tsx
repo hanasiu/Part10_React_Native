@@ -11,7 +11,6 @@ const ItemSeparator = () => <View style={styles.separator} />;
 const MyReview = () => {
     const { data } = useMe();
     const userReview: UserReview = useMyReview({includeReviews: !!data.me, first: 6});
-    console.log(userReview);
 
     const onEndReach = () => {
         console.log('You have reached the end of the list');
@@ -28,6 +27,7 @@ const MyReview = () => {
     const reviewNodes = userReview.data.me.reviews
         ? userReview?.data?.me?.reviews?.edges.map(edge => edge.node)
         : [];
+    console.log(reviewNodes);
 
     return (
         <FlatList
